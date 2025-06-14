@@ -49,6 +49,9 @@ async function run(): Promise<void> {
     core.saveState('cache-hit', String(cacheHit))
     core.setOutput('cache-hit', String(cacheHit))
 
+    core.info(`Path to cache: ${cachePath}`)
+    core.debug(`Path: ${path}`)
+
     if (cacheHit === true) {
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
