@@ -13,18 +13,18 @@ async function run(): Promise<void> {
     /* 
       clean up caches
     */
-      const cacheBase = core.getState('cache-base')
-      const cleanKey = core.getInput('clean-key')
-      const CLEAN_TIME = 7
-  
-      if (cleanKey) {
-        await exec(
-          `/bin/bash -c "find ${cacheBase} -maxdepth 1 -name '${cleanKey}*' -type d -atime +${CLEAN_TIME} -exec rm -rf {} +"`
-        )
-      }
-    } catch (error) {
-      if (error instanceof Error) core.warning(error.message)
+    const cacheBase = core.getState('cache-base')
+    const cleanKey = core.getInput('clean-key')
+    const CLEAN_TIME = 7
+
+    if (cleanKey) {
+      await exec(
+        `/bin/bash -c "find ${cacheBase} -maxdepth 1 -name '${cleanKey}*' -type d -atime +${CLEAN_TIME} -exec rm -rf {} +"`
+      )
     }
+  } catch (error) {
+    if (error instanceof Error) core.warning(error.message)
+  }
 
   try {
     const key = core.getInput('key')
@@ -51,7 +51,7 @@ async function run(): Promise<void> {
 
     if (cacheHit === true) {
       const ln = await exec(
-        `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ./${path}`
+        `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
 
       core.debug(ln.stdout)
