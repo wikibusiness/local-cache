@@ -9,6 +9,7 @@ import {
 } from '../utils/cache'
 
 async function run(): Promise<void> {
+  core.warning('Starting cache restore process')
   try {
     /* 
       clean up caches
