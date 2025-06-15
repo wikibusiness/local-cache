@@ -54,7 +54,7 @@ async function run(): Promise<void> {
 
     if (cacheHit === true) {
       // const targetDir = p.join(cachePath)
-      await exec(`mkdir -p ${path.split('/').slice(-1)[0]}`)
+      // await exec(`mkdir -p ${path.split('/').slice(-1)[0]}`)
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )

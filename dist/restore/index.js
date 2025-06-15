@@ -75,7 +75,8 @@ function run() {
             core.setOutput('cache-hit', String(cacheHit));
             core.info(`Path to cache: ${cachePath}`);
             if (cacheHit === true) {
-                yield (0, cache_1.exec)(`mkdir -p ${path}`);
+                // const targetDir = p.join(cachePath)
+                // await exec(`mkdir -p ${path.split('/').slice(-1)[0]}`)
                 const ln = yield (0, cache_1.exec)(`ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`);
                 core.debug(ln.stdout);
                 if (ln.stderr)
