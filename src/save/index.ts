@@ -12,7 +12,7 @@ async function run(): Promise<void> {
       const path = core.getState('path')
 
       await exec(`mkdir -p ${cachePath}`)
-      const cp = await exec(`cp -r ./${path} ${cachePath}`)
+      const cp = await exec(`cp -rn ./${path} ${cachePath}`)
 
       core.debug(cp.stdout)
       if (cp.stderr) core.error(cp.stderr)

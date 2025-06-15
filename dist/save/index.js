@@ -47,7 +47,7 @@ function run() {
                 const cachePath = core.getState('cache-path');
                 const path = core.getState('path');
                 yield (0, cache_1.exec)(`mkdir -p ${cachePath}`);
-                const cp = yield (0, cache_1.exec)(`cp -r ./${path} ${cachePath}`);
+                const cp = yield (0, cache_1.exec)(`cp -rn ./${path} ${cachePath}`);
                 core.debug(cp.stdout);
                 if (cp.stderr)
                     core.error(cp.stderr);
