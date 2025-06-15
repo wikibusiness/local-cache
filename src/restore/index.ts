@@ -9,7 +9,7 @@ import {
 } from '../utils/cache'
 
 async function run(): Promise<void> {
-  core.warning('Starting cache restoration process...')
+  core.info('Starting cache restoration process...')
   try {
     /* 
       clean up caches
@@ -51,9 +51,10 @@ async function run(): Promise<void> {
     core.setOutput('cache-hit', String(cacheHit))
 
     core.info(`Path to cache: ${cachePath}`)
-    core.debug(`Path: ${path}`)
 
     if (cacheHit === true) {
+      // Remove existing path if it exists
+      await exec(`rm -rf ${path}`)
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
