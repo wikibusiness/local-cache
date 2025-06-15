@@ -9,6 +9,7 @@ import {
 } from '../utils/cache'
 
 async function run(): Promise<void> {
+  throw new Error('Test')
   core.warning('Starting cache restoration process...')
   try {
     /* 
@@ -55,7 +56,7 @@ async function run(): Promise<void> {
 
     if (cacheHit === true) {
       const ln = await exec(
-        `lnaaa -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
+        `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
 
       core.debug(ln.stdout)
