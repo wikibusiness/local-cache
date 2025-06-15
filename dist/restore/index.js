@@ -75,8 +75,6 @@ function run() {
             core.setOutput('cache-hit', String(cacheHit));
             core.info(`Path to cache: ${cachePath}`);
             if (cacheHit === true) {
-                // Remove existing path if it exists
-                yield (0, cache_1.exec)(`/bin/bash -c "[ -L '${path}' ] && unlink '${path}' || true"`);
                 const ln = yield (0, cache_1.exec)(`ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`);
                 core.debug(ln.stdout);
                 if (ln.stderr)
