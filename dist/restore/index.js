@@ -60,6 +60,7 @@ function run() {
             const key = core.getInput('key');
             const base = core.getInput('base');
             const path = core.getInput('path');
+            const preDeletePath = core.getInput('pre-delete-path');
             const cacheBase = (0, cache_1.getCacheBase)(base);
             const cachePath = (0, cache_1.getCachePath)(key, base);
             (0, cache_1.checkKey)(key);
@@ -75,8 +76,10 @@ function run() {
             core.setOutput('cache-hit', String(cacheHit));
             core.info(`Path to cache: ${cachePath}`);
             if (cacheHit === true) {
-                // const targetDir = p.join(cachePath)
-                // await exec(`mkdir -p ${path.split('/').slice(-1)[0]}`)
+                if (preDeletePath) {
+                    core.info(`Deleting pre-existing path: ${preDeletePath}`);
+                    yield (0, cache_1.exec)(`rm -rf ${path}`);
+                }
                 const ln = yield (0, cache_1.exec)(`ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`);
                 core.debug(ln.stdout);
                 if (ln.stderr)

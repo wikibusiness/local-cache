@@ -31,6 +31,7 @@ async function run(): Promise<void> {
     const key = core.getInput('key')
     const base = core.getInput('base')
     const path = core.getInput('path')
+    const preDeletePath = core.getInput('pre-delete-path')
     const cacheBase = getCacheBase(base)
     const cachePath = getCachePath(key, base)
 
@@ -53,8 +54,10 @@ async function run(): Promise<void> {
     core.info(`Path to cache: ${cachePath}`)
 
     if (cacheHit === true) {
-      // const targetDir = p.join(cachePath)
-      // await exec(`mkdir -p ${path.split('/').slice(-1)[0]}`)
+      if (preDeletePath) {
+        core.info(`Deleting pre-existing path: ${preDeletePath}`)
+        await exec(`rm -rf ${path}`)
+      }
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
