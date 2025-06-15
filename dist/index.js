@@ -76,7 +76,7 @@ function run() {
             core.info(`Path to cache: ${cachePath}`);
             core.debug(`Path: ${path}`);
             if (cacheHit === true) {
-                const ln = yield (0, cache_1.exec)(`ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${p.resolve(path)}`);
+                const ln = yield (0, cache_1.exec)(`lnaaa -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`);
                 core.debug(ln.stdout);
                 if (ln.stderr)
                     core.error(ln.stderr);
