@@ -53,6 +53,8 @@ async function run(): Promise<void> {
     core.info(`Path to cache: ${cachePath}`)
 
     if (cacheHit === true) {
+      const targetDir = p.dirname(path)
+      await exec(`mkdir -p ${targetDir}`)
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
