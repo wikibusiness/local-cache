@@ -2,7 +2,6 @@ import * as core from '@actions/core'
 import {exec} from '../utils/cache'
 
 async function run(): Promise<void> {
-  throw new Error('Test')
   try {
     core.warning('Starting cache save process...')
     const cacheHit = core.getState('cache-hit')
