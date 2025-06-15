@@ -40,7 +40,7 @@ const p = __importStar(__nccwpck_require__(622));
 const cache_1 = __nccwpck_require__(891);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        core.warning('Starting cache restoration process...');
+        core.info('Starting cache restoration process...');
         try {
             /*
               clean up caches
@@ -74,8 +74,9 @@ function run() {
             core.saveState('cache-hit', String(cacheHit));
             core.setOutput('cache-hit', String(cacheHit));
             core.info(`Path to cache: ${cachePath}`);
-            core.debug(`Path: ${path}`);
             if (cacheHit === true) {
+                // Remove existing path if it exists
+                yield (0, cache_1.exec)(`rm -rf ${path}`);
                 const ln = yield (0, cache_1.exec)(`ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`);
                 core.debug(ln.stdout);
                 if (ln.stderr)

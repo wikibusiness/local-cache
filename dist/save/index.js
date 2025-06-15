@@ -40,7 +40,7 @@ const cache_1 = __nccwpck_require__(891);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            core.warning('Starting cache save process...');
+            core.info('Starting cache save process...');
             const cacheHit = core.getState('cache-hit');
             const key = core.getState('key');
             if (cacheHit === 'false') {
