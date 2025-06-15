@@ -54,7 +54,7 @@ async function run(): Promise<void> {
 
     if (cacheHit === true) {
       // Remove existing path if it exists
-      await exec(`/bin/bash -c '[ -L "${path}" ] && unlink "${path}" || true'`)
+      await exec(`/bin/bash -c "[ -L '${path}' ] && unlink '${path}' || true"`)
       const ln = await exec(
         `ln -s ${p.join(cachePath, path.split('/').slice(-1)[0])} ${path}`
       )
