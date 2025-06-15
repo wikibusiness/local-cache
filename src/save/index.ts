@@ -3,6 +3,7 @@ import {exec} from '../utils/cache'
 
 async function run(): Promise<void> {
   try {
+    core.warning('Starting cache save process...')
     const cacheHit = core.getState('cache-hit')
     const key = core.getState('key')
 
