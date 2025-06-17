@@ -12,11 +12,13 @@ async function run(): Promise<void> {
       const path = core.getState('path')
 
       await exec(`mkdir -p ${cachePath}`)
-      const cp = await exec(`cp -rn ${path} ${cachePath}`)
+      const rsync = await exec(
+        `rsync -a --ignore-existing ${path} ${cachePath}`
+      )
 
-      core.debug(cp.stdout)
-      if (cp.stderr) core.error(cp.stderr)
-      if (!cp.stderr) core.info(`Cache saved with key ${key}`)
+      core.debug(rsync.stdout)
+      if (rsync.stderr) core.error(rsync.stderr)
+      if (!rsync.stderr) core.info(`Cache saved with key ${key}`)
     } else {
       core.info(`Cache hit on the key ${key}`)
       core.info(`,not saving cache`)
